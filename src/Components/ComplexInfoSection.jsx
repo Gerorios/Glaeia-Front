@@ -18,10 +18,10 @@ const ComplexInfoSection = () => {
                 {/* Información del complejo */}
                 <div className="flex flex-col justify-center">
                     <h3 className="text-4xl font-semibold text-gray-800 mb-4">
-                        El Complejo
+                        La Galeria
                     </h3>
                     <p className="text-gray-600 mb-4">
-                        Nuestro complejo cuenta con una ubicación privilegiada y estratégica, brindando fácil acceso tanto para visitantes como para comerciantes. Con un total de 15 locales comerciales, ofrecemos una gran variedad de servicios y productos en un solo lugar.
+                        Nuestro galeria cuenta con una ubicación privilegiada y estratégica, brindando fácil acceso tanto para visitantes como para comerciantes. Con un total de 15 locales comerciales, ofrecemos una gran variedad de servicios y productos en un solo lugar.
                     </p>
                     <p className="text-gray-600">
                         Acceso directo desde la Ruta Provincial 315, lo que garantiza una llegada cómoda y segura para todos nuestros visitantes.

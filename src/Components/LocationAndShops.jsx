@@ -7,12 +7,15 @@ import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import img1 from '../assets/Imagenes_home_activos/local12.jpg';
 import img3 from '../assets/Imagenes_home_activos/local14.jpeg';
 import img4 from '../assets/Imagenes_home_activos/local15.jpeg';
+import img5 from "../assets/Imagenes_home_activos/local16.jpeg"
 import { Link } from 'react-router-dom';
+import { image } from 'framer-motion/client';
 
 const localesActivos = [
     { image: img1 },
     {image: img3},
-    {image: img4}
+    {image: img4},
+    {image:img5}
 ];
 
 const LocationAndShops = () => {
