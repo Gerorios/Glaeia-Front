@@ -5,6 +5,7 @@ import Home from './Components/Home';
 import LocalesPage from './Components/Locales/LocalesPage.jsx';
 import LocalDetailsPage from './Components/Locales/LocalDetailsPage.jsx';
 import Footer from "./Components/Common/Footer.jsx";
+import AdminPanel from "./Components/Admin/AdminPanel.jsx";
 import './index.css';
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
             <Route path="/about" element={<div>Nosotros</div>} />
             <Route path="/properties" element={<LocalesPage />} />
             <Route path="/contact" element={<div>Contacto</div>} />
+            <Route path="/admin" element={<AdminPanel />} />
             <Route path="/local/:id" element={<LocalDetailsPage />} />
           </Routes>
         </div>

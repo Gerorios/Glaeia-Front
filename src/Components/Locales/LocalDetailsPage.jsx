@@ -19,9 +19,9 @@
           direccion: 'Av. Principal 123',
           tamano: '120 m²',
           imagenes: [
-            { original: '/path/to/image1.jpg', thumbnail: '/path/to/image1_thumbnail.jpg' },
-            { original: '/path/to/image2.jpg', thumbnail: '/path/to/image2_thumbnail.jpg' },
-            { original: '/path/to/image3.jpg', thumbnail: '/path/to/image3_thumbnail.jpg' },
+            { original: 'https://th.bing.com/th/id/OIP.7stwxZm-L1BqyYwVuRKYNgHaE7?w=258&h=180&c=7&r=0&o=5&pid=1.7', thumbnail: 'https://th.bing.com/th/id/OIP.7stwxZm-L1BqyYwVuRKYNgHaE7?w=258&h=180&c=7&r=0&o=5&pid=1.7' },
+            { original: 'https://th.bing.com/th/id/OIP.sohokEiI8o8yJkqD8p1bSgHaED?w=338&h=184&c=7&r=0&o=5&pid=1.7', thumbnail: 'https://th.bing.com/th/id/OIP.sohokEiI8o8yJkqD8p1bSgHaED?w=338&h=184&c=7&r=0&o=5&pid=1.7' },
+            { original: 'https://th.bing.com/th/id/OIP.lQVsDbOA56FJo4bHOv0ZrgHaEj?w=318&h=187&c=7&r=0&o=5&pid=1.7', thumbnail: 'https://th.bing.com/th/id/OIP.lQVsDbOA56FJo4bHOv0ZrgHaEj?w=318&h=187&c=7&r=0&o=5&pid=1.7' },
           ]
         },
         2: {
