@@ -12,16 +12,26 @@ const AdminPanel = () => {
     estado: 'libre',
     direccion: '',
     tamano: '',
-    imagen: null, // Image field
+    imagen: null, // Cambiado de imagenUrl a imagen (archivo)
   });
 
-  // Fetch locals data
+  const token = localStorage.getItem('adminToken'); // Método de autenticación
+
+  // Axios configurado con el token
+  const axiosInstance = axios.create({
+    baseURL: 'http://localhost:8000/api',
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  // Obtener lista de locales
   useEffect(() => {
-    axios
-      .get('http://localhost:8000/api/locales')
+    axiosInstance
+      .get('/locales')
       .then((response) => setLocals(response.data))
       .catch((error) => console.error('Error fetching locals:', error));
-  }, []);
+  }, [token]);
 
   const openModalForEdit = (local) => {
     setNewLocal({
@@ -30,7 +40,7 @@ const AdminPanel = () => {
       estado: local.estado,
       direccion: local.direccion,
       tamano: local.tamano,
-      imagen: null, // Set to null to avoid preloading
+      imagen: null, // No se precarga el archivo
     });
     setEditingLocalId(local.id);
     setIsEditing(true);
@@ -52,35 +62,39 @@ const AdminPanel = () => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setNewLocal({ ...newLocal, [name]: value });
+    setNewLocal((prevLocal) => ({
+      ...prevLocal,
+      [name]: value,
+    }));
   };
 
   const handleFileChange = (e) => {
-    setNewLocal({ ...newLocal, imagen: e.target.files[0] });
+    setNewLocal((prevLocal) => ({
+      ...prevLocal,
+      imagen: e.target.files[0], // Guardar el archivo seleccionado
+    }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     let request;
-    const url = isEditing
-      ? `http://localhost:8000/api/locales/${editingLocalId}`
-      : 'http://localhost:8000/api/locales';
+    const url = isEditing ? `/locales/${editingLocalId}` : '/locales';
 
+    // Usar FormData para manejar archivos
     const formData = new FormData();
     formData.append('nombre', newLocal.nombre);
     formData.append('descripcion', newLocal.descripcion);
     formData.append('estado', newLocal.estado);
     formData.append('direccion', newLocal.direccion);
     formData.append('tamano', newLocal.tamano);
-
     if (newLocal.imagen) {
       formData.append('imagen', newLocal.imagen);
     }
 
     request = isEditing
-      ? axios.put(url, formData, { headers: { 'Content-Type': 'multipart/form-data' } })
-      : axios.post(url, formData, { headers: { 'Content-Type': 'multipart/form-data' } });
+      ? axiosInstance.post(`${url}?_method=PUT`, formData) // Usar método PUT con FormData
+      : axiosInstance.post(url, formData);
 
     request
       .then((response) => {
@@ -105,13 +119,18 @@ const AdminPanel = () => {
         setIsEditing(false);
         setEditingLocalId(null);
       })
-      .catch((error) => console.error('Error saving local:', error));
+      .catch((error) => {
+        console.error('Error saving local:', error);
+        if (error.response && error.response.data) {
+          console.log('Error details:', error.response.data);
+        }
+      });
   };
 
   const handleDelete = (id) => {
     if (window.confirm('¿Estás seguro de eliminar este local?')) {
-      axios
-        .delete(`http://localhost:8000/api/locales/${id}`)
+      axiosInstance
+        .delete(`/locales/${id}`)
         .then(() => {
           setLocals(locals.filter((local) => local.id !== id));
         })
@@ -133,46 +152,60 @@ const AdminPanel = () => {
       </button>
 
       {locals.length > 0 ? (
-        <table className="w-full max-w-4xl bg-white shadow-md rounded-lg overflow-hidden">
-          <thead>
-            <tr className="bg-gray-200 text-gray-700 text-center">
-              <th className="py-3 px-4">Nombre</th>
-              <th className="py-3 px-4">Descripción</th>
-              <th className="py-3 px-4">Estado</th>
-              <th className="py-3 px-4">Dirección</th>
-              <th className="py-3 px-4">Tamaño</th>
-              <th className="py-3 px-4">Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            {locals.map((local) => (
-              <tr
-                key={local.id}
-                className="text-center border-b hover:bg-gray-100"
-              >
-                <td className="py-3 px-4">{local.nombre}</td>
-                <td className="py-3 px-4">{local.descripcion}</td>
-                <td className="py-3 px-4">{local.estado}</td>
-                <td className="py-3 px-4">{local.direccion}</td>
-                <td className="py-3 px-4">{local.tamano}</td>
-                <td className="py-3 px-4">
-                  <button
-                    onClick={() => openModalForEdit(local)}
-                    className="bg-green-500 text-white py-1 px-4 rounded-full shadow-md hover:bg-green-600 transition duration-300 mr-2"
-                  >
-                    Editar
-                  </button>
-                  <button
-                    onClick={() => handleDelete(local.id)}
-                    className="bg-red-500 text-white py-1 px-4 rounded-full shadow-md hover:bg-red-600 transition duration-300"
-                  >
-                    Eliminar
-                  </button>
-                </td>
+        <div className="overflow-x-auto w-full">
+          <table className="w-full max-w-8xl bg-white shadow-md rounded-lg overflow-hidden">
+            <thead>
+              <tr className="bg-gray-200 text-gray-700 text-center">
+                <th className="py-3 px-4">Nombre</th>
+                <th className="py-3 px-4">Descripción</th>
+                <th className="py-3 px-4">Estado</th>
+                <th className="py-3 px-4">Dirección</th>
+                <th className="py-3 px-4">Tamaño</th>
+                <th className="py-3 px-4">Imagen</th>
+                <th className="py-3 px-4">Acciones</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {locals.map((local) => (
+                <tr
+                  key={local.id}
+                  className="text-center border-b hover:bg-gray-100"
+                >
+                  <td className="py-3 px-4">{local.nombre}</td>
+                  <td className="py-3 px-4">{local.descripcion}</td>
+                  <td className="py-3 px-4">{local.estado}</td>
+                  <td className="py-3 px-4">{local.direccion}</td>
+                  <td className="py-3 px-4">{local.tamano}</td>
+                  <td className="py-3 px-4">
+                    {local.imagen ? (
+                      <img
+                        src={`http://localhost:8000/storage/${local.imagen}`}
+                        alt="Local"
+                        className="h-16 w-16 object-cover rounded"
+                      />
+                    ) : (
+                      'Sin Imagen'
+                    )}
+                  </td>
+                  <td className="py-3 px-4">
+                    <button
+                      onClick={() => openModalForEdit(local)}
+                      className="bg-green-500 text-white py-1 px-4 rounded-full shadow-md hover:bg-green-600 transition duration-300 mr-1"
+                    >
+                      Editar
+                    </button>
+                    <button
+                      onClick={() => handleDelete(local.id)}
+                      className="bg-red-500 text-white py-1 px-4 rounded-full shadow-md hover:bg-red-600 transition duration-300 md:mt-3"
+                    >
+                      Eliminar
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       ) : (
         <p className="text-center text-gray-600 mt-6">
           No hay locales disponibles
@@ -181,75 +214,82 @@ const AdminPanel = () => {
 
       {showModal && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-          <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
-            <h2 className="text-2xl font-bold mb-4 text-center text-gray-700">
-              {isEditing ? 'Editar Local' : 'Agregar Local'}
-            </h2>
-            <form onSubmit={handleSubmit}>
-              <input
-                type="text"
-                name="nombre"
-                placeholder="Nombre"
-                value={newLocal.nombre}
-                onChange={handleInputChange}
-                required
-                className="w-full p-3 mb-4 border rounded-lg shadow-sm focus:outline-blue-500"
-              />
-              <textarea
-                name="descripcion"
-                placeholder="Descripción"
-                value={newLocal.descripcion}
-                onChange={handleInputChange}
-                className="w-full p-3 mb-4 border rounded-lg shadow-sm focus:outline-blue-500"
-              />
-              <select
-                name="estado"
-                value={newLocal.estado}
-                onChange={handleInputChange}
-                required
-                className="w-full p-3 mb-4 border rounded-lg shadow-sm focus:outline-blue-500"
-              >
-                <option value="libre">Libre</option>
-                <option value="ocupado">Ocupado</option>
-              </select>
-              <input
-                type="text"
-                name="direccion"
-                placeholder="Dirección"
-                value={newLocal.direccion}
-                onChange={handleInputChange}
-                className="w-full p-3 mb-4 border rounded-lg shadow-sm focus:outline-blue-500"
-              />
-              <input
-                type="text"
-                name="tamano"
-                placeholder="Tamaño"
-                value={newLocal.tamano}
-                onChange={handleInputChange}
-                className="w-full p-3 mb-4 border rounded-lg shadow-sm focus:outline-blue-500"
-              />
-              <input
-                type="file"
-                name="imagen"
-                onChange={handleFileChange}
-                className="w-full p-3 mb-4 border rounded-lg shadow-sm focus:outline-blue-500"
-              />
-              <button
-                type="submit"
-                className="w-full p-3 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-600 transition duration-300"
-              >
-                {isEditing ? 'Actualizar Local' : 'Guardar Local'}
-              </button>
-              <button
-                type="button"
-                onClick={() => setShowModal(false)}
-                className="w-full p-3 mt-4 bg-gray-400 text-white rounded-lg shadow-md hover:bg-gray-500 transition duration-300"
-              >
-                Cancelar
-              </button>
-            </form>
-          </div>
-        </div>
+  <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+    <h2 className="text-2xl font-bold mb-4 text-center text-gray-700">
+      {isEditing ? 'Editar Local' : 'Agregar Local'}
+    </h2>
+    <form onSubmit={handleSubmit}>
+      <input
+        type="text"
+        name="nombre"
+        placeholder="Nombre"
+        value={newLocal.nombre}
+        onChange={handleInputChange}
+        required
+        className="w-full p-3 mb-4 border rounded-lg shadow-sm focus:outline-blue-500"
+      />
+      <textarea
+        name="descripcion"
+        placeholder="Descripción"
+        value={newLocal.descripcion}
+        onChange={handleInputChange}
+        className="w-full p-3 mb-4 border rounded-lg shadow-sm focus:outline-blue-500"
+      />
+      <select
+        name="estado"
+        value={newLocal.estado}
+        onChange={handleInputChange}
+        required
+        className="w-full p-3 mb-4 border rounded-lg shadow-sm focus:outline-blue-500"
+      >
+        <option value="libre">Libre</option>
+        <option value="ocupado">Ocupado</option>
+      </select>
+      <input
+        type="text"
+        name="direccion"
+        placeholder="Dirección"
+        value={newLocal.direccion}
+        onChange={handleInputChange}
+        required
+        className="w-full p-3 mb-4 border rounded-lg shadow-sm focus:outline-blue-500"
+      />
+      <input
+        type="text"
+        name="tamano"
+        placeholder="Tamaño (en m²)"
+        value={newLocal.tamano}
+        onChange={handleInputChange}
+        required
+        className="w-full p-3 mb-4 border rounded-lg shadow-sm focus:outline-blue-500"
+      />
+      <div className="mb-4">
+        <input
+          type="file"
+          accept="image/*"
+          onChange={handleFileChange}
+          className="w-full p-3 border rounded-lg shadow-sm focus:outline-blue-500"
+        />
+        <p className="text-sm text-gray-500 mt-2">
+          Se recomienda subir imágenes en formato <span className="font-semibold">.WEBP</span> para mejor rendimiento.
+        </p>
+      </div>
+      <button
+        type="submit"
+        className="bg-blue-500 text-white py-2 px-6 rounded-full shadow-md hover:bg-blue-600 transition duration-300 w-full"
+      >
+        {isEditing ? 'Actualizar' : 'Guardar'}
+      </button>
+    </form>
+    <button
+      onClick={() => setShowModal(false)}
+      className="mt-4 bg-red-500 text-white py-2 px-6 rounded-full shadow-md hover:bg-red-600 transition duration-300 w-full"
+    >
+      Cancelar
+    </button>
+  </div>
+</div>
+
       )}
     </div>
   );

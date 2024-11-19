@@ -1,22 +1,23 @@
 // src/Services/authService.js
-import axios from 'axios';
-
 export async function loginAdmin(email, password) {
     try {
-        const response = await axios.post('http://localhost:8000/api/admin/login', { email, password });
+        const response = await fetch('http://localhost:8000/api/admin/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email, password }),
+        });
 
-        // Guardar el token en caso de respuesta exitosa
-        localStorage.setItem('adminToken', response.data.token);
+        if (!response.ok) {
+            throw new Error('Credenciales inválidas');
+        }
+
+        const data = await response.json();
+        localStorage.setItem('adminToken', data.token); // Guarda el token en localStorage
         return true;
     } catch (error) {
-        // Manejar errores específicos según el tipo
-        if (error.response && error.response.status === 401) {
-            console.error('Credenciales inválidas');
-        } else if (error.response && error.response.status === 403) {
-            console.error('No autorizado');
-        } else {
-            console.error('Error inesperado en el servidor');
-        }
+        console.error(error);
         return false;
     }
 }
