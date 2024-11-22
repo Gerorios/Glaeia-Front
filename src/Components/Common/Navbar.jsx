@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaBars, FaTimes, FaUserCog } from 'react-icons/fa';
-import { loginAdmin, isAuthenticated,logoutAdmin} from "../Services/authService"
+import { loginAdmin, isAuthenticated, logoutAdmin } from "../Services/authService";
+import logo from "../../assets/Logo/logo2.png";
+
 const Navbar = () => {
     const navigate = useNavigate();
     const [isOpen, setIsOpen] = useState(false);
@@ -24,22 +26,21 @@ const Navbar = () => {
 
     const handleScrollToContact = () => {
         if (window.location.pathname !== '/') {
-            navigate('/'); // Navega a la página de inicio
+            navigate('/');
             setTimeout(() => {
                 const contactSection = document.getElementById('contact-section');
                 if (contactSection) {
                     contactSection.scrollIntoView({ behavior: 'smooth' });
                 }
-            }, 300); // Espera un poco para que se cargue la página
+            }, 300);
         } else {
             const contactSection = document.getElementById('contact-section');
             if (contactSection) {
                 contactSection.scrollIntoView({ behavior: 'smooth' });
             }
         }
-        setIsOpen(false); // Cierra el menú móvil después del scroll
+        setIsOpen(false);
     };
-    
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -64,11 +65,16 @@ const Navbar = () => {
     };
 
     return (
-        <nav className="bg-gray-800 text-white py-4 relative">
-            <div className="container mx-auto flex justify-between items-center px-4">
-                <h1 className="text-2xl font-bold">
-                    <Link to="/" className="hover:text-gray-300">Logo</Link>
-                </h1>
+        <nav className="bg-primary text-secondary relative">
+            <div className="container mx-auto flex justify-between items-center px-4 h-20">
+                {/* Logo grande pero no afecta el tamaño del Navbar */}
+                <Link to="/" className="flex items-center">
+                    <img
+                        src={logo}
+                        alt="Logo"
+                        className="h-36 object-contain rounded-full" // Aumenta el tamaño del logo sin agrandar el nav
+                    />
+                </Link>
 
                 <div className="hidden md:flex space-x-4 mx-auto">
                     <Link to="/" className="hover:text-gray-300">Inicio</Link>
@@ -88,8 +94,8 @@ const Navbar = () => {
                     )}
                 </div>
 
-                <div className="md:hidden">
-                    <button onClick={toggleMenu} className="text-2xl focus:outline-none">
+                <div className="md:hidden mx-4">
+                    <button onClick={toggleMenu} className="text-2xl focus:outline-none ">
                         {isOpen ? <FaTimes /> : <FaBars />}
                     </button>
                 </div>
@@ -97,7 +103,7 @@ const Navbar = () => {
 
             {/* Menú móvil */}
             {isOpen && (
-                <div className="md:hidden absolute top-full left-0 w-full bg-gray-800 text-white flex flex-col items-center space-y-4 py-4 px-4 z-50">
+                <div className="md:hidden absolute top-full left-0 w-full bg-primary text-white flex flex-col items-center space-y-4 py-4 px-4 z-50">
                     <Link to="/" className="hover:text-gray-300" onClick={toggleMenu}>Inicio</Link>
                     <Link to="/properties" className="hover:text-gray-300" onClick={toggleMenu}>Locales</Link>
                     <button onClick={handleScrollToContact} className="hover:text-gray-300">Contacto</button>
@@ -115,32 +121,57 @@ const Navbar = () => {
 
             {/* Modal de Login */}
             {showLoginModal && (
-                <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 text-black">
-                    <div className="bg-gray-300 p-6 rounded-md shadow-md">
-                        <h2 className="text-xl font-bold mb-4 text-center">Iniciar Sesión</h2>
-                        <form onSubmit={handleLogin}>
-                            <input
-                                type="email"
-                                placeholder="Email"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                                required
-                                className="w-full p-2 mb-4 border rounded"
-                            />
-                            <input
-                                type="password"
-                                placeholder="Contraseña"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                                required
-                                className="w-full p-2 mb-4 border rounded"
-                            />
-                            <button type="submit" className="w-full p-2 bg-gray-900 text-white rounded">Iniciar Sesión</button>
-                            <button onClick={() => setShowLoginModal(false)} className="w-full p-2 mt-2 bg-gray-900 text-white rounded">Cancelar</button>
-                        </form>
-                    </div>
+    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 text-black">
+        <div className="bg-white p-8 rounded-lg shadow-xl relative w-96">
+            {/* Icono de Cerrar */}
+            <button
+                onClick={() => setShowLoginModal(false)}
+                className="absolute top-2 right-2 text-gray-500 hover:text-gray-700 focus:outline-none"
+            >
+                <FaTimes className="text-xl" />
+            </button>
+            {/* Título */}
+            <h2 className="text-2xl font-bold text-center mb-6 text-gray-800">
+                Iniciar Sesión
+            </h2>
+            {/* Formulario */}
+            <form onSubmit={handleLogin} className="space-y-4">
+                <div>
+                    <label className="block text-sm font-medium text-gray-600 mb-1">
+                        Correo Electrónico
+                    </label>
+                    <input
+                        type="email"
+                        placeholder="Ingresa tu correo"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
+                        className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+                    />
                 </div>
-            )}
+                <div>
+                    <label className="block text-sm font-medium text-gray-600 mb-1">
+                        Contraseña
+                    </label>
+                    <input
+                        type="password"
+                        placeholder="Ingresa tu contraseña"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                        className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+                    />
+                </div>
+                <button
+                    type="submit"
+                    className="w-full py-3 bg-primary text-white rounded-lg hover:bg-neutral transition duration-300"
+                >
+                    Iniciar Sesión
+                </button>
+            </form>
+        </div>
+    </div>
+)}
         </nav>
     );
 };

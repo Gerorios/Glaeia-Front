@@ -9,12 +9,12 @@ import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import { useNavigate } from 'react-router-dom';
 
 import img1 from '../assets/Imagenes_Carrousel/img1.jpg';
-import img2 from '../assets/Imagenes_Carrousel/img2.jpg';
-import img3 from '../assets/Imagenes_Carrousel/img3.jpg';
+import img2 from '../assets/Imagenes_Carrousel/galeria.webp';
+import img3 from '../assets/Imagenes_Carrousel/fotosflores.webp';
 
 const slides = [
   {
-    image: img1,
+    image: img3,
     title: "Bienvenido al Paseo Comercial Las Rosas",
     description: "Encuentra el lugar ideal para disfrutar",
     buttonText: "Ver Locales",
@@ -26,7 +26,7 @@ const slides = [
     buttonText: "Contactenos",
   },
   {
-    image: img3,
+    image: img1,
     title: "Alquiler para eventos",
     description: "Reserve tu espacio para un momento inolvidable",
     buttonText: "Conoce Más",
@@ -53,7 +53,7 @@ const ImageCarousel = () => {
             src={slide.image}
             alt={`Imagen ${index + 1}`}
             className="w-full h-full object-cover "
-            style={{ filter: 'brightness(0.4)' }} // Aplica opacidad oscura
+            style={{ filter: 'brightness(0.5)' }} // Aplica opacidad oscura
           />
 
           {/* Contenido sobre la imagen */}
@@ -65,7 +65,7 @@ const ImageCarousel = () => {
             {slide.buttonText === "Conoce Más" && (
               <button
                 onClick={() => document.getElementById('more-info-section').scrollIntoView({ behavior: 'smooth' })}
-                className="bg-blue-600 px-6 py-2 rounded-full text-white font-semibold hover:bg-blue-700 transition animate-fadeIn delay-400"
+                className="bg-white px-6 py-2 rounded-full text-black font-semibold hover:bg-neutral transition animate-fadeIn delay-400"
               >
                 {slide.buttonText}
               </button>
@@ -74,7 +74,7 @@ const ImageCarousel = () => {
             {slide.buttonText === "Ver Locales" && (
               <button
                 onClick={() => navigate('/properties')}
-                className="bg-blue-600 px-6 py-2 rounded-full text-white font-semibold hover:bg-blue-700 transition animate-fadeIn delay-400"
+                className="bg-white px-6 py-2 rounded-full text-black font-semibold hover:bg-neutral transition animate-fadeIn delay-400"
               >
                 {slide.buttonText}
               </button>
@@ -83,7 +83,7 @@ const ImageCarousel = () => {
             {slide.buttonText === "Contactenos" && (
               <button
                 onClick={() => document.getElementById('contact-section').scrollIntoView({ behavior: 'smooth' })}
-                className="bg-blue-600 px-6 py-2 rounded-full text-white font-semibold hover:bg-blue-700 transition animate-fadeIn delay-400"
+                className="bg-white px-6 py-2 rounded-full text-black font-semibold hover:bg-neutral transition animate-fadeIn delay-400"
               >
                 {slide.buttonText}
               </button>

@@ -22,14 +22,14 @@ const aboutItems = [
 
 const AboutSection = () => {
   return (
-    <section className="bg-gray-100 py-16 px-8" id='more-info-section'>
+    <section className="bg-neutral py-16 px-8" id='more-info-section'>
       {/* Texto descriptivo de la galería */}
       <div className="max-w-4xl mx-auto mb-12 text-center">
-        <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+        <h2 className="text-3xl md:text-4xl font-bold text-secondary mb-4">
           Bienvenido al Paseo Comercial Las Rosas 
 
         </h2>
-        <p className="text-lg md:text-xl text-gray-600">
+        <p className="text-lg md:text-xl text-black">
           Nuestra galería comercial es el punto de encuentro para negocios de todo tipo. Aquí podrás encontrar desde locales gastronómicos y de moda hasta espacios dedicados a servicios. Un lugar diseñado para ofrecer a los visitantes una experiencia única y, al mismo tiempo, brindar a los comerciantes un espacio estratégico en una ubicación privilegiada. 
         </p>
       </div>

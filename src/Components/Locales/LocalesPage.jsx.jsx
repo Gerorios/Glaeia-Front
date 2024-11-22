@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import LocalCard from './LocalCard';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import { Autoplay, Pagination } from 'swiper/modules';
 
 const LocalesPage = () => {
   const [localesData, setLocalesData] = useState([]);
@@ -19,7 +24,7 @@ const LocalesPage = () => {
   }, []);
 
   // Filtrado de locales
-    const filteredLocales = localesData.filter(local => {
+  const filteredLocales = localesData.filter(local => {
     const matchesSearch = local.nombre.toLowerCase().includes(search.toLowerCase());
     const matchesFilter = filter === '' || local.estado === filter;
     return matchesSearch && matchesFilter;
@@ -38,11 +43,31 @@ const LocalesPage = () => {
         />
       </div>
 
-      {/* Cards de locales */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-        {filteredLocales.map(local => (
-          <LocalCard key={local.id} local={local} />
-        ))}
+      {/* Mostrar locales */}
+      <div>
+        {/* Carrusel para pantallas pequeñas */}
+        <div className="block sm:hidden">
+          <Swiper
+            spaceBetween={10}
+            slidesPerView={1}
+            autoplay={{ delay: 1500 }}
+            modules={[Autoplay, Pagination]}
+        
+          >
+            {filteredLocales.map(local => (
+              <SwiperSlide key={local.id}>
+                <LocalCard local={local} />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
+
+        {/* Grid para pantallas medianas y grandes */}
+        <div className="hidden sm:grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          {filteredLocales.map(local => (
+            <LocalCard key={local.id} local={local} />
+          ))}
+        </div>
       </div>
     </div>
   );

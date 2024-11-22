@@ -4,13 +4,11 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 
-import img1 from '../assets/Imagenes_home_activos/local12.jpg';
-import img3 from '../assets/Imagenes_home_activos/local14.jpeg';
-import img4 from '../assets/Imagenes_home_activos/local15.jpeg';
-import img5 from "../assets/Imagenes_home_activos/local16.jpeg"
+import img1 from '../assets/Imagenes_home_activos/local12.webp';
+import img3 from '../assets/Imagenes_home_activos/local14.webp';
+import img4 from '../assets/Imagenes_home_activos/local15.webp';
+import img5 from "../assets/Imagenes_home_activos/local16.webp"
 import { Link } from 'react-router-dom';
-import { image } from 'framer-motion/client';
-
 const localesActivos = [
     { image: img1 },
     {image: img3},
@@ -20,15 +18,15 @@ const localesActivos = [
 
 const LocationAndShops = () => {
     return (
-        <section className="py-16 bg-gray-100 px-8">
+        <section className="py-16 bg-neutral px-8">
             <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-36">
 
                 {/* Columna de Ubicación */}
                 <div className="flex flex-col items-center md:items-start">
-                    <h3 className="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
+                    <h3 className="text-2xl font-semibold text-secondary mb-4 flex items-center">
                         <FaMapMarkerAlt className="text-red-500 mr-2" /> Donde Podes Encontrarnos?
                     </h3>
-                    <p className="text-gray-600 mb-3">
+                    <p className="text-black mb-3 font-semibold">
                         Nuestra galería se encuentra en Juan M de Rosas y Ruta 315, ofreciendo acceso directo por ruta 315.
                     </p>
                     {/* Mapa de Google embebido o un marcador estático */}
@@ -43,10 +41,10 @@ const LocationAndShops = () => {
 
                 {/* Columna de Locales Activos */}
                 <div>
-                    <h3 className="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
-                        <FaShoppingBag className='mr-2 text-green-600'/> Locales Activos
+                    <h3 className="text-2xl font-semibold text-secondary mb-4 flex items-center">
+                        <FaShoppingBag className='mr-2 text-white'/> Locales Activos
                     </h3>
-                    <p className="text-gray-600 mb-4">
+                    <p className="text-blackmb-4 font-semibold">
                         Estos son algunos de los locales que ya se encuentran operando en nuestra galería.
                          Visítanos para explorar la oferta completa de servicios y productos.
                     </p>
