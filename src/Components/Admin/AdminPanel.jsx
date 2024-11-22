@@ -19,7 +19,7 @@ const AdminPanel = () => {
 
   // Axios configurado con el token
   const axiosInstance = axios.create({
-    baseURL: 'http://localhost:8000/api',
+    baseURL: 'https://paseocomerciallasrosas.com/api',
     headers: {
       Authorization: `Bearer ${token}`,
     },

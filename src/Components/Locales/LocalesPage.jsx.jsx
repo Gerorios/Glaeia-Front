@@ -14,7 +14,7 @@ const LocalesPage = () => {
 
   useEffect(() => {
     // Solicitar los locales desde la API
-    axios.get('http://localhost:8000/api/locales') // Cambia esta URL si es necesario
+    axios.get('https://paseocomerciallasrosas.com/api/locales') // Cambia esta URL si es necesario
       .then((response) => {
         setLocalesData(response.data);
       })
