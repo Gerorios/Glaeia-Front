@@ -79,7 +79,7 @@ const AdminPanel = () => {
     e.preventDefault();
 
     let request;
-    const url = isEditing ? `/locales/${editingLocalId}` : '/locales';
+    const url = isEditing ? `locales/${editingLocalId}` : '/locales';
 
     // Usar FormData para manejar archivos
     const formData = new FormData();
@@ -179,7 +179,7 @@ const AdminPanel = () => {
                   <td className="py-3 px-4">
                     {local.imagen ? (
                       <img
-                        src={`http://localhost:8000/storage/${local.imagen}`}
+                        src={`${local.imagen}`}
                         alt="Local"
                         className="h-16 w-16 object-cover rounded"
                       />

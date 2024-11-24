@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const LocalCard = ({ local }) => {
   // Construye la URL completa de la imagen
-  const imageUrl = `http://localhost:8000/storage/${local.imagen}`;  
+  const imageUrl =`${local.imagen}`;  
 
   return (
     <div className="relative group border rounded-lg shadow-lg overflow-hidden w-full ">
