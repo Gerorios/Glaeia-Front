@@ -22,10 +22,10 @@ const aboutItems = [
 
 const AboutSection = () => {
   return (
-    <section className="bg-neutral py-16 px-8" id='more-info-section'>
+    <section className="bg-secondary py-16 px-8" id='more-info-section'>
       {/* Texto descriptivo de la galería */}
       <div className="max-w-4xl mx-auto mb-12 text-center">
-        <h2 className="text-3xl md:text-4xl font-bold text-secondary mb-4">
+        <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">
           Bienvenido al Paseo Comercial Las Rosas 
 
         </h2>

@@ -1,10 +1,9 @@
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css'; // Importación correcta para Swiper CSS
+import 'swiper/css'; 
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
-// Importa los módulos que necesites
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import { useNavigate } from 'react-router-dom';
 
@@ -34,7 +33,7 @@ const slides = [
 ];
 
 const ImageCarousel = () => {
-  const navigate = useNavigate(); // Para manejar la navegación entre páginas
+  const navigate = useNavigate(); 
 
   return (
     <Swiper
@@ -48,20 +47,19 @@ const ImageCarousel = () => {
     >
       {slides.map((slide, index) => (
         <SwiperSlide key={index} className="relative">
-          {/* Imagen de fondo con opacidad */}
+         
           <img
             src={slide.image}
             alt={`Imagen ${index + 1}`}
             className="w-full h-full object-cover "
-            style={{ filter: 'brightness(0.5)' }} // Aplica opacidad oscura
+            style={{ filter: 'brightness(0.5)' }} 
           />
 
-          {/* Contenido sobre la imagen */}
           <div className="absolute inset-0 flex flex-col justify-center items-center text-center text-white px-4">
             <h2 className="text-4xl md:text-4xl font-bold mb-4 animate-fadeIn">{slide.title}</h2>
             <p className="text-lg md:text-xl mb-6 opacity-80 animate-fadeIn delay-200">{slide.description}</p>
             
-            {/* Botón dinámico */}
+            
             {slide.buttonText === "Conoce Más" && (
               <button
                 onClick={() => document.getElementById('more-info-section').scrollIntoView({ behavior: 'smooth' })}

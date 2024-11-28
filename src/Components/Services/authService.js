@@ -1,7 +1,6 @@
-// src/Services/authService.js
 export async function loginAdmin(email, password) {
     try {
-        const response = await fetch('https://paseocomerciallasrosas.com/api/admin/login', {
+        const response = await fetch('http://localhost:8000/api/admin/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -14,7 +13,7 @@ export async function loginAdmin(email, password) {
         }
 
         const data = await response.json();
-        localStorage.setItem('adminToken', data.token); // Guarda el token en localStorage
+        localStorage.setItem('adminToken', data.token); 
         return true;
     } catch (error) {
         console.error(error);
@@ -27,5 +26,5 @@ export function isAuthenticated() {
 }
 
 export function logoutAdmin() {
-    localStorage.removeItem('adminToken'); // Quita el token al cerrar sesión
+    localStorage.removeItem('adminToken'); 
 }

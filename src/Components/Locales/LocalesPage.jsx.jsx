@@ -13,8 +13,8 @@ const LocalesPage = () => {
   const [filter, setFilter] = useState('');
 
   useEffect(() => {
-    // Solicitar los locales desde la API
-    axios.get('https://paseocomerciallasrosas.com/api/locales') // Cambia esta URL si es necesario
+
+    axios.get('http://localhost:8000/api/locales') 
       .then((response) => {
         setLocalesData(response.data);
       })
@@ -23,7 +23,7 @@ const LocalesPage = () => {
       });
   }, []);
 
-  // Filtrado de locales
+
   const filteredLocales = localesData.filter(local => {
     const matchesSearch = local.nombre.toLowerCase().includes(search.toLowerCase());
     const matchesFilter = filter === '' || local.estado === filter;
@@ -32,7 +32,6 @@ const LocalesPage = () => {
 
   return (
     <div className="p-8">
-      {/* Barra de búsqueda y filtro */}
       <div className="flex justify-between items-center mb-8">
         <input
           type="text"
@@ -42,10 +41,7 @@ const LocalesPage = () => {
           className="border border-gray-300 rounded px-4 py-2 w-full m-2"
         />
       </div>
-
-      {/* Mostrar locales */}
       <div>
-        {/* Carrusel para pantallas pequeñas */}
         <div className="block sm:hidden">
           <Swiper
             spaceBetween={10}
@@ -61,8 +57,6 @@ const LocalesPage = () => {
             ))}
           </Swiper>
         </div>
-
-        {/* Grid para pantallas medianas y grandes */}
         <div className="hidden sm:grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {filteredLocales.map(local => (
             <LocalCard key={local.id} local={local} />

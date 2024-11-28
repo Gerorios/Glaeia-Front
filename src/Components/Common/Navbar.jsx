@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { FaBars, FaTimes, FaUserCog } from 'react-icons/fa';
+import { FaBars, FaTimes, FaUserCog, FaSignOutAlt, FaTools } from 'react-icons/fa';
 import { loginAdmin, isAuthenticated, logoutAdmin } from "../Services/authService";
 import logo from "../../assets/Logo/logo2.png";
+import { toast } from 'react-toastify';
 
 const Navbar = () => {
     const navigate = useNavigate();
@@ -24,23 +25,26 @@ const Navbar = () => {
         }
     };
 
-    const handleScrollToContact = () => {
+    const handleScrollToSection = (sectionId) => {
         if (window.location.pathname !== '/') {
             navigate('/');
             setTimeout(() => {
-                const contactSection = document.getElementById('contact-section');
-                if (contactSection) {
-                    contactSection.scrollIntoView({ behavior: 'smooth' });
+                const section = document.getElementById(sectionId);
+                if (section) {
+                    section.scrollIntoView({ behavior: 'smooth' });
                 }
             }, 300);
         } else {
-            const contactSection = document.getElementById('contact-section');
-            if (contactSection) {
-                contactSection.scrollIntoView({ behavior: 'smooth' });
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.scrollIntoView({ behavior: 'smooth' });
             }
         }
         setIsOpen(false);
     };
+
+    const handleScrollToContact = () => handleScrollToSection('contact-section');
+    const handleScrollToNovedades = () => handleScrollToSection('novedades');
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -49,8 +53,9 @@ const Navbar = () => {
             setIsAdmin(true);
             setShowLoginModal(false);
             navigate('/admin');
+            toast.success('Inicio de sesión exitoso')
         } else {
-            alert('Credenciales inválidas');
+            toast.error('Credenciales inválidas')
         }
     };
 
@@ -67,12 +72,11 @@ const Navbar = () => {
     return (
         <nav className="bg-primary text-secondary relative">
             <div className="container mx-auto flex justify-between items-center px-4 h-20">
-                {/* Logo grande pero no afecta el tamaño del Navbar */}
                 <Link to="/" className="flex items-center">
                     <img
                         src={logo}
                         alt="Logo"
-                        className="h-36 object-contain rounded-full" // Aumenta el tamaño del logo sin agrandar el nav
+                        className="h-36 object-contain rounded-full" 
                     />
                 </Link>
 
@@ -80,13 +84,22 @@ const Navbar = () => {
                     <Link to="/" className="hover:text-gray-300">Inicio</Link>
                     <Link to="/properties" className="hover:text-gray-300">Locales</Link>
                     <button onClick={handleScrollToContact} className="hover:text-gray-300">Contacto</button>
+                    <button onClick={handleScrollToNovedades} className="hover:text-gray-300">Novedades</button>
                 </div>
 
-                <div className="hidden md:flex">
+                <div className="hidden md:flex items-center space-x-4">
                     {isAdmin ? (
-                        <button onClick={handleLogout} className="hover:text-gray-300">
-                            Cerrar Sesión
-                        </button>
+                        <>
+                            <button
+                                onClick={() => navigate('/admin')}
+                                className="hover:text-gray-300 flex items-center space-x-2"
+                            >
+                                <FaTools className="text-2xl" />
+                            </button>
+                            <button onClick={handleLogout} className="hover:text-gray-300 flex items-center">
+                                <FaSignOutAlt className="text-2xl" />
+                            </button>
+                        </>
                     ) : (
                         <button onClick={handleAdminClick} className="hover:text-gray-300">
                             <FaUserCog className="text-2xl" />
@@ -95,83 +108,91 @@ const Navbar = () => {
                 </div>
 
                 <div className="md:hidden mx-4">
-                    <button onClick={toggleMenu} className="text-2xl focus:outline-none ">
+                    <button onClick={toggleMenu} className="text-2xl focus:outline-none">
                         {isOpen ? <FaTimes /> : <FaBars />}
                     </button>
                 </div>
             </div>
-
-            {/* Menú móvil */}
             {isOpen && (
                 <div className="md:hidden absolute top-full left-0 w-full bg-primary text-white flex flex-col items-center space-y-4 py-4 px-4 z-50">
                     <Link to="/" className="hover:text-gray-300" onClick={toggleMenu}>Inicio</Link>
                     <Link to="/properties" className="hover:text-gray-300" onClick={toggleMenu}>Locales</Link>
                     <button onClick={handleScrollToContact} className="hover:text-gray-300">Contacto</button>
+                    <button onClick={handleScrollToNovedades} className="hover:text-gray-300">Novedades</button>
                     {isAdmin ? (
-                        <button onClick={() => { toggleMenu(); handleLogout(); }} className="hover:text-gray-300">
-                            Cerrar Sesión
-                        </button>
+                        <>
+                            <button
+                                onClick={() => { toggleMenu(); navigate('/admin'); }}
+                                className="hover:text-gray-300 flex items-center space-x-2"
+                            >
+                                <FaTools className="text-xl" />
+                            </button>
+                            <button
+                                onClick={() => { toggleMenu(); handleLogout(); }}
+                                className="hover:text-gray-300 flex items-center"
+                            >
+                                <FaSignOutAlt className="text-xl" />
+                            </button>
+                        </>
                     ) : (
-                        <button onClick={() => { toggleMenu(); setShowLoginModal(true); }} className="hover:text-gray-300">
+                        <button
+                            onClick={() => { toggleMenu(); setShowLoginModal(true); }}
+                            className="hover:text-gray-300"
+                        >
                             Iniciar Sesión
                         </button>
                     )}
                 </div>
             )}
-
-            {/* Modal de Login */}
             {showLoginModal && (
-    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 text-black">
-        <div className="bg-white p-8 rounded-lg shadow-xl relative w-96">
-            {/* Icono de Cerrar */}
-            <button
-                onClick={() => setShowLoginModal(false)}
-                className="absolute top-2 right-2 text-gray-500 hover:text-gray-700 focus:outline-none"
-            >
-                <FaTimes className="text-xl" />
-            </button>
-            {/* Título */}
-            <h2 className="text-2xl font-bold text-center mb-6 text-gray-800">
-                Iniciar Sesión
-            </h2>
-            {/* Formulario */}
-            <form onSubmit={handleLogin} className="space-y-4">
-                <div>
-                    <label className="block text-sm font-medium text-gray-600 mb-1">
-                        Correo Electrónico
-                    </label>
-                    <input
-                        type="email"
-                        placeholder="Ingresa tu correo"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        required
-                        className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
-                    />
+                <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 text-black">
+                    <div className="bg-white p-8 rounded-lg shadow-xl relative w-96">
+                        <button
+                            onClick={() => setShowLoginModal(false)}
+                            className="absolute top-2 right-2 text-gray-500 hover:text-gray-700 focus:outline-none"
+                        >
+                            <FaTimes className="text-xl" />
+                        </button>
+                        <h2 className="text-2xl font-bold text-center mb-6 text-gray-800">
+                            Iniciar Sesión
+                        </h2>
+                        <form onSubmit={handleLogin} className="space-y-4">
+                            <div>
+                                <label className="block text-sm font-medium text-gray-600 mb-1">
+                                    Correo Electrónico
+                                </label>
+                                <input
+                                    type="email"
+                                    placeholder="Ingresa tu correo"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    required
+                                    className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+                                />
+                            </div>
+                            <div>
+                                <label className="block text-sm font-medium text-gray-600 mb-1">
+                                    Contraseña
+                                </label>
+                                <input
+                                    type="password"
+                                    placeholder="Ingresa tu contraseña"
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    required
+                                    className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+                                />
+                            </div>
+                            <button
+                                type="submit"
+                                className="w-full py-3 bg-primary text-white rounded-lg hover:bg-neutral transition duration-300"
+                            >
+                                Iniciar Sesión
+                            </button>
+                        </form>
+                    </div>
                 </div>
-                <div>
-                    <label className="block text-sm font-medium text-gray-600 mb-1">
-                        Contraseña
-                    </label>
-                    <input
-                        type="password"
-                        placeholder="Ingresa tu contraseña"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        required
-                        className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
-                    />
-                </div>
-                <button
-                    type="submit"
-                    className="w-full py-3 bg-primary text-white rounded-lg hover:bg-neutral transition duration-300"
-                >
-                    Iniciar Sesión
-                </button>
-            </form>
-        </div>
-    </div>
-)}
+            )}
         </nav>
     );
 };
