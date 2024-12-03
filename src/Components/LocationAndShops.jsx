@@ -1,4 +1,6 @@
 import React from 'react';
+import { useState, useEffect} from 'react'
+import axios from 'axios';
 import { FaMapMarkerAlt, FaShoppingBag } from 'react-icons/fa';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
@@ -17,7 +19,20 @@ const localesActivos = [
     {image:img5}
 ];
 
+
 const LocationAndShops = () => {
+
+    const [datoslocales, setdatoslocales] = useState([]);
+useEffect(() => {
+    axios.get('https://paseocomerciallasrosas.com/api/locales') 
+      .then((response) => {
+        setdatoslocales(response.data);
+      })
+      .catch((error) => {
+        console.error('Error al obtener los locales:', error);
+      });
+  }, []);
+
     return (
         <section className="py-16 bg-neutral px-8">
             <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-36">
@@ -40,9 +55,9 @@ const LocationAndShops = () => {
                 </div>
                 <div>
                     <h3 className="text-2xl font-semibold text-secondary mb-4 flex items-center">
-                        <FaShoppingBag className='mr-2 text-white'/> Locales Activos
+                        <FaShoppingBag className='mr-2 text-green-600'/> Locales
                     </h3>
-                    <p className="text-blackmb-4 font-semibold">
+                    <p className="text-blackmb-4 font-semibold mb-2">
                         Estos son algunos de los locales que ya se encuentran operando en nuestra galería.
                          Visítanos para explorar la oferta completa de servicios y productos.
                     </p>
@@ -55,13 +70,13 @@ const LocationAndShops = () => {
                         autoplay={{ delay: 2000 }}
                         modules={[Navigation, Pagination, Autoplay]}
                     >
-                        {localesActivos.map((local, index) => (
+                        {datoslocales.map((local, index) => (
                             <SwiperSlide key={index}>
                                 <div className="relative w-full h-64 rounded-lg overflow-hidden group">
                                 
                                     <Link to="/properties">
                                     <img
-                                        src={local.image}
+                                        src={local.imagen}
                                         alt={`Local Activo ${index + 1}`}
                                         className="w-full h-full object-contain rounded-lg transition-transform duration-300 group-hover:scale-105"
                                     />

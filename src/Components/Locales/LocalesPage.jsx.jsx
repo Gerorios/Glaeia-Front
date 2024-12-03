@@ -46,7 +46,7 @@ const LocalesPage = () => {
           <Swiper
             spaceBetween={10}
             slidesPerView={1}
-            autoplay={{ delay: 1500 }}
+            autoplay={{ delay: 3000 }}
             modules={[Autoplay, Pagination]}
         
           >

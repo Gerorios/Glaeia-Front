@@ -12,7 +12,7 @@ const ContactSection = () => {
           {/* Placeholder para contenido futuro */}
           <h3 className="text-2xl font-semibold text-center text-primary">¡Estamos para ayudarte!</h3>
           <p className="text-gray-400 text-center text-xl font-semibold">
-            Ponte en contacto con nosotros por cualquiera de los medios proporcionados a la derecha.
+            Ponte en contacto con nosotros por cualquiera de los medios proporcionados.
           </p>
         </div>
 
