@@ -9,7 +9,7 @@ const Novedades = () => {
 
   useEffect(() => {
     axios
-      .get('https://paseocomerciallasrosas.com/api/novedades')
+      .get('https://paseocomerciallasrosas.com//api/novedades')
       .then((response) => setNovedades(response.data))
       .catch((error) => console.error('Error al obtener las novedades:', error));
   }, []);

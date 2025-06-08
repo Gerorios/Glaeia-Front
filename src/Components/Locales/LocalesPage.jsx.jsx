@@ -14,7 +14,7 @@ const LocalesPage = () => {
 
   useEffect(() => {
 
-    axios.get('https://paseocomerciallasrosas.com/api/locales') 
+    axios.get('https://paseocomerciallasrosas.com//api/locales') 
       .then((response) => {
         setLocalesData(response.data);
       })

@@ -24,7 +24,7 @@ const LocationAndShops = () => {
 
     const [datoslocales, setdatoslocales] = useState([]);
 useEffect(() => {
-    axios.get('https://paseocomerciallasrosas.com/api/locales') 
+    axios.get('https://paseocomerciallasrosas.com//api/locales') 
       .then((response) => {
         setdatoslocales(response.data);
       })
