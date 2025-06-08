@@ -46,25 +46,6 @@ const Navbar = () => {
     const handleScrollToContact = () => handleScrollToSection('contact-section');
     const handleScrollToNovedades = () => handleScrollToSection('novedades');
 
-    const handleLogin = async (e) => {
-        e.preventDefault();
-        const success = await loginAdmin(email, password);
-        if (success) {
-            setIsAdmin(true);
-            setShowLoginModal(false);
-            navigate('/admin');
-            toast.success('Inicio de sesión exitoso')
-        } else {
-            toast.error('Credenciales inválidas')
-        }
-    };
-
-    const handleLogout = () => {
-        logoutAdmin();
-        setIsAdmin(false);
-        navigate('/');
-    };
-
     const toggleMenu = () => {
         setIsOpen(!isOpen);
     };
@@ -80,33 +61,12 @@ const Navbar = () => {
                     />
                 </Link>
 
-                <div className="hidden md:flex space-x-4 mx-auto">
+                <div className="hidden md:flex space-x-4 ml-auto">
                     <Link to="/" className="hover:text-gray-300">Inicio</Link>
                     <Link to="/properties" className="hover:text-gray-300">Locales</Link>
                     <button onClick={handleScrollToContact} className="hover:text-gray-300">Contacto</button>
                     <button onClick={handleScrollToNovedades} className="hover:text-gray-300">Novedades</button>
                 </div>
-
-                <div className="hidden md:flex items-center space-x-4">
-                    {isAdmin ? (
-                        <>
-                            <button
-                                onClick={() => navigate('/admin')}
-                                className="hover:text-gray-300 flex items-center space-x-2"
-                            >
-                                <FaTools className="text-2xl" />
-                            </button>
-                            <button onClick={handleLogout} className="hover:text-gray-300 flex items-center">
-                                <FaSignOutAlt className="text-2xl" />
-                            </button>
-                        </>
-                    ) : (
-                        <button onClick={handleAdminClick} className="hover:text-gray-300">
-                            <FaUserCog className="text-2xl" />
-                        </button>
-                    )}
-                </div>
-
                 <div className="md:hidden mx-4">
                     <button onClick={toggleMenu} className="text-2xl focus:outline-none">
                         {isOpen ? <FaTimes /> : <FaBars />}
