@@ -43,6 +43,7 @@ const LocalesPage = () => {
       </div>
       <div>
         <div className="block sm:hidden">
+          <h2 className='text-center mb-6 text-xl font-bold text-primary'>Contamos actualmente con {localesData.length} locales de todo tipo!</h2>
           <Swiper
             spaceBetween={10}
             slidesPerView={1}
