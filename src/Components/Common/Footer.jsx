@@ -12,6 +12,7 @@ const Footer = () => {
                     target="_blank" rel="noopener noreferrer"
                 >
                     Todos los derechos reservados.
+                    as
                 </a>
             </p>
             <div className="mx-3">
