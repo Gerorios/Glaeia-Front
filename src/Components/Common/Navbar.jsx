@@ -79,78 +79,7 @@ const Navbar = () => {
                     <Link to="/properties" className="hover:text-gray-300" onClick={toggleMenu}>Locales</Link>
                     <button onClick={handleScrollToContact} className="hover:text-gray-300">Contacto</button>
                     <button onClick={handleScrollToNovedades} className="hover:text-gray-300">Novedades</button>
-                    {isAdmin ? (
-                        <>
-                            <button
-                                onClick={() => { toggleMenu(); navigate('/admin'); }}
-                                className="hover:text-gray-300 flex items-center space-x-2"
-                            >
-                                <FaTools className="text-xl" />
-                            </button>
-                            <button
-                                onClick={() => { toggleMenu(); handleLogout(); }}
-                                className="hover:text-gray-300 flex items-center"
-                            >
-                                <FaSignOutAlt className="text-xl" />
-                            </button>
-                        </>
-                    ) : (
-                        <button
-                            onClick={() => { toggleMenu(); setShowLoginModal(true); }}
-                            className="hover:text-gray-300"
-                        >
-                            Iniciar Sesión
-                        </button>
-                    )}
-                </div>
-            )}
-            {showLoginModal && (
-                <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 text-black">
-                    <div className="bg-white p-8 rounded-lg shadow-xl relative w-96">
-                        <button
-                            onClick={() => setShowLoginModal(false)}
-                            className="absolute top-2 right-2 text-gray-500 hover:text-gray-700 focus:outline-none"
-                        >
-                            <FaTimes className="text-xl" />
-                        </button>
-                        <h2 className="text-2xl font-bold text-center mb-6 text-gray-800">
-                            Iniciar Sesión
-                        </h2>
-                        <form onSubmit={handleLogin} className="space-y-4">
-                            <div>
-                                <label className="block text-sm font-medium text-gray-600 mb-1">
-                                    Correo Electrónico
-                                </label>
-                                <input
-                                    type="email"
-                                    placeholder="Ingresa tu correo"
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
-                                    required
-                                    className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
-                                />
-                            </div>
-                            <div>
-                                <label className="block text-sm font-medium text-gray-600 mb-1">
-                                    Contraseña
-                                </label>
-                                <input
-                                    type="password"
-                                    placeholder="Ingresa tu contraseña"
-                                    value={password}
-                                    onChange={(e) => setPassword(e.target.value)}
-                                    required
-                                    className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
-                                />
-                            </div>
-                            <button
-                                type="submit"
-                                className="w-full py-3 bg-primary text-white rounded-lg hover:bg-neutral transition duration-300"
-                            >
-                                Iniciar Sesión
-                            </button>
-                        </form>
-                    </div>
+                
                 </div>
             )}
         </nav>

@@ -28,7 +28,7 @@ const AdminPanel = () => {
 
 
   const axiosInstance = axios.create({
-    baseURL: 'https://paseocomerciallasrosas.com//api',
+    baseURL: 'https://paseocomerciallasrosas.com/api',
     headers: {
       Authorization: `Bearer ${token}`,
     },
