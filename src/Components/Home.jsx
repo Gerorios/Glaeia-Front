@@ -1,22 +1,24 @@
-import React from 'react';
-import ImageCarousel from './ImageCarousel';
+import React , {lazy, Suspense}from 'react';
 import AboutSection from './AboutSection';
-import LocationAndShops from './LocationAndShops';
 import ComplexInfoSection from './ComplexInfoSection';
 import ContactSection from './ContactSection';
-import Novedades from './Novedades';
 
+const ImageCarousel = lazy(() => import('./ImageCarousel.jsx'));
+const Novedades = lazy(() => import('./Novedades.jsx'));
+const LocationAndShops = lazy(() => import('./LocationAndShops.jsx'));  
 
 const Home = () => {
   return (
     <div>
 
-      <ImageCarousel /> 
-      <AboutSection />
-      <ComplexInfoSection /> 
-      <Novedades />
-      <LocationAndShops />
-      <ContactSection />
+      <Suspense fallback={<div>Cargando...</div>}>
+        <ImageCarousel />
+        <AboutSection />
+        <ComplexInfoSection />
+        <Novedades />
+        <LocationAndShops />
+        <ContactSection />
+      </Suspense>
     </div>
   );
 };
