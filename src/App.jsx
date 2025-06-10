@@ -1,13 +1,16 @@
-import React from 'react';
+import React ,{Suspense, lazy} from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Navbar from './components/Common/Navbar.jsx'; 
-import Home from './Components/Home';
-import LocalesPage from './Components/Locales/LocalesPage.jsx';
+import Navbar from './Components/Common/Navbar.jsx'; 
 import Footer from "./Components/Common/Footer.jsx";
-import AdminPanel from "./Components/Admin/AdminPanel.jsx";
 import './index.css';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
+
+const Home = lazy(() => import('./components/Home.jsx'));
+const LocalesPage = lazy(() => import('./Components/Locales/LocalesPage.jsx'));
+const AdminPanel = lazy(() => import('./Components/Admin/AdminPanel.jsx'));
+
 
 function App() {
   return (
@@ -15,11 +18,13 @@ function App() {
       <div className="flex flex-col min-h-screen">
         <Navbar />
         <div className="flex-grow font-sans text-gray-800">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/properties" element={<LocalesPage />} />
-            <Route path="/admins" element={<AdminPanel />} />
-          </Routes>
+          <Suspense fallback={<div>Cargando...</div>}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/properties" element={<LocalesPage />} />
+              <Route path="/admins" element={<AdminPanel />} />
+            </Routes>
+          </Suspense>
         </div>
         <ToastContainer />
         <Footer />
