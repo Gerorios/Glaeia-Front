@@ -35,7 +35,7 @@ const Navbar = () => {
     const toggleMenu = () => setIsOpen(!isOpen);
 
     return (
-        <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
+        <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-1000 ${
             scrolled ? 'bg-primary shadow-md' : 'bg-transparent'
         } text-secondary`}>
             <div className="container mx-auto flex justify-between items-center px-4 h-20">

@@ -1,15 +1,15 @@
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css'; 
+import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import { useNavigate } from 'react-router-dom';
 
-import img1 from '../assets/Imagenes_Carrousel/Cerveza.jpg';
-import img2 from '../assets/Imagenes_Carrousel/Cafetera.jpg';
-import img3 from '../assets/Imagenes_Carrousel/ShopsBags.jpg';
+import img1 from '../assets/Imagenes_Carrousel/Cerveza.webp';
+import img2 from '../assets/Imagenes_Carrousel/Cafetera.webp';
+import img3 from '../assets/Imagenes_Carrousel/ShopsBags.webp';
 
 const slides = [
   {
@@ -33,7 +33,7 @@ const slides = [
 ];
 
 const ImageCarousel = () => {
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   return (
     <Swiper
@@ -43,27 +43,34 @@ const ImageCarousel = () => {
       autoplay={{ delay: 3500 }}
       pagination={{ clickable: true }}
       modules={[Pagination, Autoplay]}
-      className="w-full h-[700px] md:h-[700px]"
+      className="w-full h-[500px] md:h-[700px]"
     >
       {slides.map((slide, index) => (
-        <SwiperSlide key={index} className="relative">
-         
+        <SwiperSlide key={`slide-${index}`} className="relative">
           <img
             src={slide.image}
             alt={`Imagen ${index + 1}`}
-            className="w-full h-full object-cover "
-            style={{ filter: 'brightness(0.4)' }} 
+            className="w-full h-full object-cover"
+            loading="lazy"
+            style={{ filter: 'brightness(0.4)' }}
           />
 
           <div className="absolute inset-0 flex flex-col justify-center items-center text-center text-white px-4">
-            <h2 className="text-4xl md:text-4xl font-bold mb-4 animate-fadeIn">{slide.title}</h2>
-            <p className="text-lg md:text-xl mb-6 opacity-80 animate-fadeIn delay-200">{slide.description}</p>
-            
-            
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 animate-fadeIn">
+              {slide.title}
+            </h2>
+            <p className="text-lg md:text-xl mb-6 opacity-80 animate-fadeIn delay-500">
+              {slide.description}
+            </p>
+
             {slide.buttonText === "Conoce Más" && (
               <button
-                onClick={() => document.getElementById('more-info-section').scrollIntoView({ behavior: 'smooth' })}
-                className="bg-white px-6 py-2 rounded-full text-black font-semibold hover:bg-neutral transition animate-fadeIn delay-400"
+                onClick={() =>
+                  document
+                    .getElementById('more-info-section')
+                    .scrollIntoView({ behavior: 'smooth' })
+                }
+                className="bg-white px-6 py-2 rounded-full text-black font-semibold hover:bg-neutral transition animate-fadeIn delay-500"
               >
                 {slide.buttonText}
               </button>
@@ -72,7 +79,7 @@ const ImageCarousel = () => {
             {slide.buttonText === "Ver Locales" && (
               <button
                 onClick={() => navigate('/properties')}
-                className="bg-white px-6 py-2 rounded-full text-black font-semibold hover:bg-neutral transition animate-fadeIn delay-400"
+                className="bg-white px-6 py-2 rounded-full text-black font-semibold hover:bg-neutral transition animate-fadeIn delay-500"
               >
                 {slide.buttonText}
               </button>
@@ -80,7 +87,11 @@ const ImageCarousel = () => {
 
             {slide.buttonText === "Contactenos" && (
               <button
-                onClick={() => document.getElementById('contact-section').scrollIntoView({ behavior: 'smooth' })}
+                onClick={() =>
+                  document
+                    .getElementById('contact-section')
+                    .scrollIntoView({ behavior: 'smooth' })
+                }
                 className="bg-white px-6 py-2 rounded-full text-black font-semibold hover:bg-neutral transition animate-fadeIn delay-400"
               >
                 {slide.buttonText}
