@@ -18,7 +18,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/properties" element={<LocalesPage />} />
-            <Route path="/admin" element={<AdminPanel />} />
+            <Route path="/admins" element={<AdminPanel />} />
           </Routes>
         </div>
         <ToastContainer />

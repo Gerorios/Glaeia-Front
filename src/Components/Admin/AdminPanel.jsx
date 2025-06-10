@@ -192,7 +192,7 @@ const AdminPanel = () => {
   };
 
   return (
-    <div className="p-8 bg-gray-100 min-h-screen flex flex-col items-center">
+    <div className="p-8 bg-primary min-h-screen flex flex-col items-center">
       <h1 className="text-4xl font-bold mb-6 text-center text-gray-800">
         Panel de Administración
       </h1>

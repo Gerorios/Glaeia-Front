@@ -7,19 +7,19 @@ import 'swiper/css/pagination';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import { useNavigate } from 'react-router-dom';
 
-import img1 from '../assets/Imagenes_Carrousel/img1.jpg';
-import img2 from '../assets/Imagenes_Carrousel/galeria.webp';
-import img3 from '../assets/Imagenes_Carrousel/fotosflores.webp';
+import img1 from '../assets/Imagenes_Carrousel/Cerveza.jpg';
+import img2 from '../assets/Imagenes_Carrousel/Cafetera.jpg';
+import img3 from '../assets/Imagenes_Carrousel/ShopsBags.jpg';
 
 const slides = [
   {
-    image: img3,
+    image: img2,
     title: "Bienvenido al Paseo Comercial Las Rosas",
     description: "Encuentra el lugar ideal para disfrutar",
     buttonText: "Ver Locales",
   },
   {
-    image: img2,
+    image: img3,
     title: "Espacios Comerciales",
     description: "Perfectos para tu negocio en crecimiento.",
     buttonText: "Contactenos",
@@ -52,7 +52,7 @@ const ImageCarousel = () => {
             src={slide.image}
             alt={`Imagen ${index + 1}`}
             className="w-full h-full object-cover "
-            style={{ filter: 'brightness(0.5)' }} 
+            style={{ filter: 'brightness(0.4)' }} 
           />
 
           <div className="absolute inset-0 flex flex-col justify-center items-center text-center text-white px-4">
