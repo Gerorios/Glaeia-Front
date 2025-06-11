@@ -32,6 +32,9 @@ const Navbar = () => {
 
     const handleScrollToContact = () => handleScrollToSection('contact-section');
     const handleScrollToNovedades = () => handleScrollToSection('novedades');
+    const handleScrollToInicio = () => handleScrollToSection('inicio');
+    const handleScrollToLocales = () => handleScrollToSection('Sect-locales');
+    const handleScrollToUbic = () => handleScrollToSection('Ubicacion')
     const toggleMenu = () => setIsOpen(!isOpen);
 
     return (
@@ -48,10 +51,11 @@ const Navbar = () => {
                 </Link>
 
                 <div className="hidden md:flex space-x-4 ml-auto">
-                    <Link to="/" className="hover:text-gray-300">Inicio</Link>
-                    <Link to="/properties" className="hover:text-gray-300">Locales</Link>
+                    <Link to="/" className="hover:text-gray-300" onClick={handleScrollToInicio}>Inicio</Link>
+                    <Link className="hover:text-gray-300" onClick={handleScrollToLocales}>Locales</Link>
                     <button onClick={handleScrollToContact} className="hover:text-gray-300">Contacto</button>
                     <button onClick={handleScrollToNovedades} className="hover:text-gray-300">Novedades</button>
+                    <button onClick={handleScrollToUbic} className="hover:text-gray-300">Encontranos</button>
                 </div>
 
                 <div className="md:hidden mx-4">
@@ -67,14 +71,13 @@ const Navbar = () => {
   >
     <Link
       to="/"
-      onClick={toggleMenu}
+      onClick={handleScrollToInicio}
       className="block px-4 py-3 text-sm hover:bg-gray-100"
     >
       Inicio
     </Link>
     <Link
-      to="/properties"
-      onClick={toggleMenu}
+      onClick={handleScrollToLocales}
       className="block px-4 py-3 text-sm hover:bg-gray-100"
     >
       Locales
@@ -91,6 +94,7 @@ const Navbar = () => {
     >
       Novedades
     </button>
+    <button onClick={handleScrollToUbic} className="block w-full text-left px-4 py-3 text-sm hover:bg-gray-100">Encontranos</button>
   </div>
 )}
 

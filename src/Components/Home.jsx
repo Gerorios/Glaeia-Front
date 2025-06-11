@@ -1,6 +1,7 @@
 import React , {lazy, Suspense}from 'react';
 import AboutSection from './AboutSection';
 import ContactSection from './ContactSection';
+import UbicacionGaleria from './UbicacionGaleria.jsx';
 
 const ImageCarousel = lazy(() => import('./ImageCarousel.jsx'));
 const Novedades = lazy(() => import('./Novedades.jsx'));
@@ -17,6 +18,7 @@ const Home = () => {
         <ComplexInfoSection />
         <Novedades />
         <LocationAndShops />
+        <UbicacionGaleria />
         <ContactSection />
       </Suspense>
     </div>

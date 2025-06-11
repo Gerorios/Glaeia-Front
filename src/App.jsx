@@ -9,7 +9,6 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 const Home = lazy(() => import('./components/Home.jsx'));
-const LocalesPage = lazy(() => import('./Components/Locales/LocalesPage.jsx'));
 const AdminPanel = lazy(() => import('./Components/Admin/AdminPanel.jsx'));
 
 
@@ -22,7 +21,6 @@ function App() {
           <Suspense fallback={<div>Cargando...</div>}>
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/properties" element={<LocalesPage />} />
               <Route path="/admins" element={<AdminPanel />} />
             </Routes>
           </Suspense>

@@ -44,6 +44,7 @@ const ImageCarousel = () => {
       pagination={{ clickable: true }}
       modules={[Pagination, Autoplay]}
       className="w-full h-screen md:h-[900px]"
+      id='inicio'
     >
       {slides.map((slide, index) => (
         <SwiperSlide key={`slide-${index}`} className="relative">
@@ -66,7 +67,7 @@ const ImageCarousel = () => {
               <button
                 onClick={() =>
                   document
-                    .getElementById('more-info-section')
+                    .getElementById('seccion-compleja')
                     .scrollIntoView({ behavior: 'smooth' })
                 }
                 className="bg-white px-6 py-2 rounded-full text-black font-semibold hover:bg-neutral transition animate-fadeIn delay-500 font-body"
@@ -77,7 +78,11 @@ const ImageCarousel = () => {
 
             {slide.buttonText === "Ver Locales" && (
               <button
-                onClick={() => navigate('/properties')}
+                onClick={() => 
+                document
+                  .getElementById('Sect-locales')
+                  .scrollIntoView({ behavior: 'smooth' })
+                }
                 className="bg-white px-6 py-2 rounded-full text-black font-semibold hover:bg-neutral transition animate-fadeIn delay-500 font-body"
               >
                 {slide.buttonText}

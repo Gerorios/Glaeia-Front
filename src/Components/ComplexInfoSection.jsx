@@ -3,21 +3,23 @@ import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 
 // Imágenes y miniatura para video
-import galeria1 from '../assets/Galeria/FotoBarDentro.webp';
+import galeria1 from '../assets/Galeria/FotoBarDentro.jpg';
 import galeria2 from '../assets/Galeria/FotoDeFuera.webp';
 import galeria3 from '../assets/Galeria/GaleriaLejos.webp'; 
+import galeria4 from '../assets/Galeria/GaleriaLejos2.webp';
 
 const ComplexInfoSection = () => {
   const [index, setIndex] = useState(-1);
 
   const galleryItems = [
-    { type: 'image', src: galeria1 },
-    { type: 'image', src: galeria2 },
     { type: 'image', src: galeria3 },
+    { type: 'image', src: galeria2 },
+    { type: 'image', src: galeria4 },
+    { type: 'image', src: galeria1 },
   ];
 
   return (
-    <section className="py-16 bg-neutral px-6">
+    <section className="py-16 bg-neutral px-6" id='seccion-compleja'>
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10">
         {/* Texto descriptivo */}
         <div className="flex flex-col justify-center">
@@ -34,7 +36,7 @@ const ComplexInfoSection = () => {
         </div>
 
         {/* Galería estilo Masonry */}
-        <div className="columns-2 gap-4 space-y-4">
+        <div className="columns-2   gap-4 space-y-4">
           {galleryItems.map((item, i) => (
             <div
               key={i}
