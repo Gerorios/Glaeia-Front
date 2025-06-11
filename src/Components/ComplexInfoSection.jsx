@@ -3,7 +3,7 @@ import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 
 // Imágenes y miniatura para video
-import galeria1 from '../assets/Galeria/FotoBarDentro.jpg';
+import galeria1 from '../assets/Galeria/FotoBarDentro.webp';
 import galeria2 from '../assets/Galeria/FotoDeFuera.webp';
 import galeria3 from '../assets/Galeria/GaleriaLejos.webp'; 
 import galeria4 from '../assets/Galeria/GaleriaLejos2.webp';
