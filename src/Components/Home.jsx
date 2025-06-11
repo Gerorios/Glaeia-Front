@@ -1,11 +1,11 @@
 import React , {lazy, Suspense}from 'react';
 import AboutSection from './AboutSection';
-import ComplexInfoSection from './ComplexInfoSection';
 import ContactSection from './ContactSection';
 
 const ImageCarousel = lazy(() => import('./ImageCarousel.jsx'));
 const Novedades = lazy(() => import('./Novedades.jsx'));
 const LocationAndShops = lazy(() => import('./LocationAndShops.jsx'));  
+const ComplexInfoSection = lazy((=> import('./ComplexInfoSection.jsx')))
 
 const Home = () => {
   return (

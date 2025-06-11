@@ -6,11 +6,10 @@ const ContactSection = () => {
 
   return (
     <section className="py-8 bg-white px-4 sm:px-8" id="contact-section">
-      <h2 className="text-3xl sm:text-3xl font-bold text-center mb-6 text-primary">Contáctanos</h2>
+      <h2 className="text-3xl sm:text-3xl  text-center mb-6 text-primary font-title">Contáctanos</h2>
       <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="space-y-4">
-          {/* Placeholder para contenido futuro */}
-          <h3 className="text-2xl font-semibold text-center text-primary">¡Estamos para ayudarte!</h3>
+          <h3 className="text-2xl text-center text-primary font-title">¡Estamos para ayudarte!</h3>
           <p className="text-gray-400 text-center text-xl font-semibold">
             Ponte en contacto con nosotros por cualquiera de los medios proporcionados.
           </p>
