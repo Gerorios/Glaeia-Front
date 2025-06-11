@@ -7,6 +7,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
+
 const Home = lazy(() => import('./components/Home.jsx'));
 const LocalesPage = lazy(() => import('./Components/Locales/LocalesPage.jsx'));
 const AdminPanel = lazy(() => import('./Components/Admin/AdminPanel.jsx'));

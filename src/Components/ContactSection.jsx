@@ -2,7 +2,7 @@ import React from 'react';
 import { FaMapMarkerAlt, FaPhoneAlt, FaEnvelope } from 'react-icons/fa';
 
 const ContactSection = () => {
-  const whatsappNumber = "3815638116"; // Número de WhatsApp sin espacios ni guiones
+  const whatsappNumber = "3815638116"; 
 
   return (
     <section className="py-8 bg-white px-4 sm:px-8" id="contact-section">
@@ -16,27 +16,29 @@ const ContactSection = () => {
           </p>
         </div>
 
-        <div className="text-base sm:text-lg text-gray-900 space-y-6 flex flex-col items-center">
-          <div className="flex items-center space-x-3">
-            <FaMapMarkerAlt className="text-neutral text-2xl flex-shrink-0" />
-            <p className="text-center">Juan M de Rosas y Ruta 315, con acceso directo por ruta 315</p>
+        <div className="text-base sm:text-lg text-gray-900 space-y-6 flex flex-col items-center w-full">
+          <div className="flex items-start space-x-3 w-full">
+            <FaMapMarkerAlt className="text-neutral text-2xl flex-shrink-0 mt-1" />
+            <p className="text-left break-words text-sm sm:text-base w-full">
+              Juan M de Rosas y Ruta 315, con acceso directo por ruta 315
+            </p>
           </div>
-          <div className="flex items-center space-x-3">
+          <div className="flex items-center space-x-3 w-full">
             <FaPhoneAlt className="text-neutral text-2xl flex-shrink-0" />
             <a
               href={`https://wa.me/54${whatsappNumber}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-black hover:underline"
+              className="text-black hover:underline text-sm sm:text-base break-words"
             >
               381-563-811-6
             </a>
           </div>
-          <div className="flex items-center space-x-3">
-            <FaEnvelope className="text-neutral text-2xl flex-shrink-0" />
+          <div className="flex items-start space-x-3 w-full">
+            <FaEnvelope className="text-neutral text-2xl flex-shrink-0 mt-1" />
             <a
               href="mailto:Pcr-administracion@paseocomerciallasrosas.com.ar"
-              className="text-black hover:underline"
+              className="text-black hover:underline text-left text-sm sm:text-base break-words w-full"
             >
               Pcr-administracion@paseocomerciallasrosas.com.ar
             </a>

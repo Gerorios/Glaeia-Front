@@ -61,16 +61,39 @@ const Navbar = () => {
                 </div>
             </div>
 
-            {isOpen && (
-                <div className={`md:hidden absolute top-full left-0 w-full bg-primary text-white flex flex-col items-center space-y-4 py-4 px-4 z-50 border-2 border-gray-200 border-opacity-50 ${
-            scrolled ? 'bg-primary shadow-md' : 'bg-transparent'
-        } text-secondary`}>
-                    <Link to="/" className="hover:text-gray-300" onClick={toggleMenu}>Inicio</Link>
-                    <Link to="/properties" className="hover:text-gray-300" onClick={toggleMenu}>Locales</Link>
-                    <button onClick={handleScrollToContact} className="hover:text-gray-300">Contacto</button>
-                    <button onClick={handleScrollToNovedades} className="hover:text-gray-300">Novedades</button>
-                </div>
-            )}
+{isOpen && (
+  <div
+    className="absolute right-4 top-20 w-52 bg-white text-black rounded-md shadow-lg border border-gray-200 z-50 animate-slideDown"
+  >
+    <Link
+      to="/"
+      onClick={toggleMenu}
+      className="block px-4 py-3 text-sm hover:bg-gray-100"
+    >
+      Inicio
+    </Link>
+    <Link
+      to="/properties"
+      onClick={toggleMenu}
+      className="block px-4 py-3 text-sm hover:bg-gray-100"
+    >
+      Locales
+    </Link>
+    <button
+      onClick={handleScrollToContact}
+      className="block w-full text-left px-4 py-3 text-sm hover:bg-gray-100"
+    >
+      Contacto
+    </button>
+    <button
+      onClick={handleScrollToNovedades}
+      className="block w-full text-left px-4 py-3 text-sm hover:bg-gray-100"
+    >
+      Novedades
+    </button>
+  </div>
+)}
+
         </nav>
     );
 };
