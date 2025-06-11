@@ -11,7 +11,7 @@ const aboutItems = [
   {
     icon: <FaUtensils className="text-4xl text-green-500 mb-4" />,
     title: "Gastronomía y Más",
-    description: "Explora una variedad de locales de comida, cafeterías y cervecerias, brindando a nuestros visitantes una experiencia completa.",
+    description: "Explora una variedad de locales desde cerverias, librerias y esteticas hasta kioskos 24hs y mas! brindando a nuestros visitantes una experiencia completa.",
   },
   {
     icon: <FaEnvelope className="text-4xl text-yellow-500 mb-4" />,
@@ -25,16 +25,15 @@ const AboutSection = () => {
     <section className="bg-secondary py-16 px-8" id='more-info-section'>
       {/* Texto descriptivo de la galería */}
       <div className="max-w-4xl mx-auto mb-12 text-center">
-        <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">
+        <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4 font-title">
           Bienvenido al Paseo Comercial Las Rosas 
 
         </h2>
-        <p className="text-lg md:text-xl text-black">
+        <p className="text-lg md:text-xl text-black font-body">
           Nuestra galería comercial es el punto de encuentro para negocios de todo tipo. Aquí podrás encontrar desde locales gastronómicos y de moda hasta espacios dedicados a servicios. Un lugar diseñado para ofrecer a los visitantes una experiencia única y, al mismo tiempo, brindar a los comerciantes un espacio estratégico en una ubicación privilegiada. 
         </p>
       </div>
 
-      {/* Tarjetas informativas */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
         {aboutItems.map((item, index) => (
           <motion.div

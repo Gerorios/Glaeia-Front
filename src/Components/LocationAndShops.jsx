@@ -38,10 +38,10 @@ useEffect(() => {
             <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-36">
 
                 <div className="flex flex-col items-center md:items-start">
-                    <h3 className="text-2xl font-semibold text-secondary mb-4 flex items-center">
+                    <h3 className="text-2xl  text-secondary mb-4 flex items-center font-title">
                         <FaMapMarkerAlt className="text-red-500 mr-2" /> Donde Podes Encontrarnos?
                     </h3>
-                    <p className="text-black mb-3 font-semibold">
+                    <p className="text-black mb-3  font-body">
                         Nuestra galería se encuentra en Juan M de Rosas y Ruta 315, ofreciendo acceso directo por ruta 315.
                     </p>
                    
@@ -54,10 +54,10 @@ useEffect(() => {
                     ></iframe>
                 </div>
                 <div>
-                    <h3 className="text-2xl font-semibold text-secondary mb-4 flex items-center">
+                    <h3 className="text-2xl text-secondary mb-4 flex items-center font-title">
                         <FaShoppingBag className='mr-2 text-green-600'/> Locales
                     </h3>
-                    <p className="text-blackmb-4 font-semibold mb-2">
+                    <p className="text-blackmb-4 mb-2 font-body">
                         Estos son algunos de los locales que ya se encuentran operando en nuestra galería.
                          Visítanos para explorar la oferta completa de servicios y productos.
                     </p>

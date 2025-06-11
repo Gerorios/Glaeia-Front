@@ -43,7 +43,7 @@ const ImageCarousel = () => {
       autoplay={{ delay: 3500 }}
       pagination={{ clickable: true }}
       modules={[Pagination, Autoplay]}
-      className="w-full h-[500px] md:h-[700px]"
+      className="w-full h-screen md:h-[900px]"
     >
       {slides.map((slide, index) => (
         <SwiperSlide key={`slide-${index}`} className="relative">
@@ -56,13 +56,12 @@ const ImageCarousel = () => {
           />
 
           <div className="absolute inset-0 flex flex-col justify-center items-center text-center text-white px-4">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 animate-fadeIn">
+            <h2 className="text-3xl md:text-4xl  mb-2 animate-fadeIn font-title">
               {slide.title}
             </h2>
-            <p className="text-lg md:text-xl mb-6 opacity-80 animate-fadeIn delay-500">
+            <p className="text-lg md:text-xl mb-6 opacity-80 animate-fadeIn delay-500 font-body">
               {slide.description}
             </p>
-
             {slide.buttonText === "Conoce Más" && (
               <button
                 onClick={() =>
@@ -70,7 +69,7 @@ const ImageCarousel = () => {
                     .getElementById('more-info-section')
                     .scrollIntoView({ behavior: 'smooth' })
                 }
-                className="bg-white px-6 py-2 rounded-full text-black font-semibold hover:bg-neutral transition animate-fadeIn delay-500"
+                className="bg-white px-6 py-2 rounded-full text-black font-semibold hover:bg-neutral transition animate-fadeIn delay-500 font-body"
               >
                 {slide.buttonText}
               </button>
@@ -79,7 +78,7 @@ const ImageCarousel = () => {
             {slide.buttonText === "Ver Locales" && (
               <button
                 onClick={() => navigate('/properties')}
-                className="bg-white px-6 py-2 rounded-full text-black font-semibold hover:bg-neutral transition animate-fadeIn delay-500"
+                className="bg-white px-6 py-2 rounded-full text-black font-semibold hover:bg-neutral transition animate-fadeIn delay-500 font-body"
               >
                 {slide.buttonText}
               </button>
@@ -92,7 +91,7 @@ const ImageCarousel = () => {
                     .getElementById('contact-section')
                     .scrollIntoView({ behavior: 'smooth' })
                 }
-                className="bg-white px-6 py-2 rounded-full text-black font-semibold hover:bg-neutral transition animate-fadeIn delay-400"
+                className="bg-white px-6 py-2 rounded-full text-black font-semibold hover:bg-neutral transition animate-fadeIn delay-400 font-body"
               >
                 {slide.buttonText}
               </button>

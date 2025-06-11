@@ -11,6 +11,10 @@ module.exports = {
         accent: '#000000', // Negro profundo (color de acento)
         neutral: '#A6A6A6', // Gris medio (color neutro)
       },
+     fontFamily: {
+        title: ['"Bebas Neue"', 'sans-serif'],
+        body: ['"Bodoni Moda"', 'serif'],
+      },
     },
   },
   plugins: [],
