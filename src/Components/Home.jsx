@@ -4,8 +4,8 @@ import ContactSection from './ContactSection';
 
 const ImageCarousel = lazy(() => import('./ImageCarousel.jsx'));
 const Novedades = lazy(() => import('./Novedades.jsx'));
-const LocationAndShops = lazy(() => import('./LocationAndShops.jsx'));  
-const ComplexInfoSection = lazy((=> import('./ComplexInfoSection.jsx')))
+const LocationAndShops = lazy(() => import('./LocationAndShops.jsx'));
+const ComplexInfoSection = lazy(() => import('./ComplexInfoSection.jsx'));
 
 const Home = () => {
   return (

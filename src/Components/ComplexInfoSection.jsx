@@ -3,24 +3,23 @@ import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 
 // Imágenes y miniatura para video
-import galeria1 from '../assets/Galeria/Estetica.webp';
-import galeria2 from '../assets/Galeria/FotoBarDentro.webp';
-import galeria3 from '../assets/Galeria/FotoDeFuera.webp';
-import galeria4 from '../assets/Galeria/GaleriaLejos.webp';
+import galeria1 from '../assets/Galeria/FotoBarDentro.webp';
+import galeria2 from '../assets/Galeria/FotoDeFuera.webp';
+import galeria3 from '../assets/Galeria/GaleriaLejos.webp'; 
 
 const ComplexInfoSection = () => {
   const [index, setIndex] = useState(-1);
 
   const galleryItems = [
+    { type: 'image', src: galeria1 },
     { type: 'image', src: galeria2 },
     { type: 'image', src: galeria3 },
-    { type: 'image', src: galeria4},
   ];
 
   return (
     <section className="py-16 bg-neutral px-6">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10">
-       
+        {/* Texto descriptivo */}
         <div className="flex flex-col justify-center">
           <h3 className="text-4xl text-secondary mb-4 font-title">Descubrí el Paseo Comercial Las Rosas</h3>
           <p className="text-gray-100 mb-4 font-body">
@@ -34,6 +33,7 @@ const ComplexInfoSection = () => {
           </p>
         </div>
 
+        {/* Galería estilo Masonry */}
         <div className="columns-2 gap-4 space-y-4">
           {galleryItems.map((item, i) => (
             <div
@@ -45,7 +45,7 @@ const ComplexInfoSection = () => {
                 <img
                   src={item.src}
                   alt={`Galería ${i}`}
-                  className="w-full h-auto object-contain transition duration-300 ease-in-out hover:scale-[1.02] max-h-[fullpx]"
+                  className="w-full h-auto object-contain transition duration-300 ease-in-out hover:scale-[1.02]"
                 />
               ) : (
                 <div className="relative">
@@ -63,6 +63,13 @@ const ComplexInfoSection = () => {
           ))}
         </div>
       </div>
+      
+      <Lightbox
+        open={index >= 0}
+        close={() => setIndex(-1)}
+        index={index}
+        slides={galleryItems}
+      />
     </section>
   );
 };
